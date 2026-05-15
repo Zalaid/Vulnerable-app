@@ -4,7 +4,10 @@ from fastapi.responses import RedirectResponse, FileResponse, JSONResponse, HTML
 from controllers.auth_controller import signup as do_signup, login as do_login
 from config.db import get_db
 
-FRONTEND_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'frontend')
+# Get absolute path to frontend directory
+BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_DIR = os.path.dirname(BACKEND_DIR)
+FRONTEND_DIR = os.path.join(PROJECT_DIR, 'frontend')
 router = APIRouter()
 
 @router.get('/')
@@ -24,8 +27,8 @@ def login_page():
     return FileResponse(os.path.join(FRONTEND_DIR, 'login.html'))
 
 @router.post('/login')
-def login_post(username: str = Form(None), password: str = Form(None)):
-    return do_login(username, password)
+def login_post(request: Request, username: str = Form(None), password: str = Form(None)):
+    return do_login(request, username, password)
 
 # Vuln: Database download endpoint (simulates server misconfiguration)
 # In real apps: backup files, database exports, git repos, etc. can be accidentally exposed

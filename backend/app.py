@@ -9,7 +9,11 @@ from config.db import init_db
 from routes.auth_routes import router
 
 PORT = int(os.environ.get('PORT', 3001))
-FRONTEND_DIR = os.path.join(os.path.dirname(__file__), '..', 'frontend')
+
+# Get absolute path to frontend directory
+BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.dirname(BACKEND_DIR)
+FRONTEND_DIR = os.path.join(PROJECT_DIR, 'frontend')
 
 # Vuln #3: Weak session secret - hardcoded and predictable
 # Vuln #3: No secure/httponly flags on cookies

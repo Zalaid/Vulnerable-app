@@ -4,7 +4,10 @@ from fastapi import Form, Request
 from fastapi.responses import RedirectResponse, HTMLResponse
 from config.db import get_db
 
-FRONTEND_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'frontend')
+# Get absolute path to frontend directory
+BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_DIR = os.path.dirname(BACKEND_DIR)
+FRONTEND_DIR = os.path.join(PROJECT_DIR, 'frontend')
 
 def signup(username: str = Form(None), email: str = Form(None), password: str = Form(None)):
     if not username or not email or not password:
