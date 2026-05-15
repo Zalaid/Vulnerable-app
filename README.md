@@ -4,14 +4,6 @@ An intentionally vulnerable web application designed to teach common security vu
 
 **Warning:** This application is deliberately insecure. It is designed for educational use only and should never be deployed to production or used on systems you don't own.
 
-## 📝 Latest Updates
-
-- ✅ Removed password/username length validation for easier testing
-- ✅ Added professional logo headers (top left & top right) on all pages
-- ✅ Modern gradient UI design with improved styling
-- ✅ Created protected `/welcome` endpoint for session hijacking demonstrations
-- ✅ Session cookies now properly set on login, cleared on logout
-- ✅ Database cleared for fresh testing
 
 ## Overview
 
