@@ -144,15 +144,6 @@ These vulnerabilities are relevant to:
 - **Real-world security** - These same vulnerabilities are found in production applications and exploited by attackers
 - **Bug bounty programs** - Understanding these basics is essential for vulnerability research
 
-## After Completing This Project
-
-Explore these next steps:
-
-- Patch the vulnerabilities using secure coding practices (parameterized queries, output escaping, password hashing, rate limiting)
-- Review the OWASP Security Best Practices documentation
-- Practice on platforms like HackTheBox, TryHackMe, or OWASP WebGoat
-- Participate in bug bounty programs on platforms like HackerOne or Bugcrowd
-
 ## Troubleshooting
 
 **"python command not found"**
