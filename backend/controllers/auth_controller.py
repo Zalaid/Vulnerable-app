@@ -14,14 +14,8 @@ def signup(username: str = Form(None), email: str = Form(None), password: str = 
         return HTMLResponse('Error: All fields are required')
 
     # Validation - require reasonable length
-    if len(username) < 3 or len(username) > 20:
-        return HTMLResponse('Error: Username must be 3-20 characters')
 
-    if len(password) < 8 or len(password) > 50:
-        return HTMLResponse('Error: Password must be 8-50 characters')
 
-    if '@' not in email or len(email) < 5:
-        return HTMLResponse('Error: Invalid email format')
 
     # Vuln #1: SQL Injection - raw string concatenation (despite validation)
     # Attacker must craft proper SQL to exploit
@@ -42,8 +36,6 @@ def login(request: Request, username: str = Form(None), password: str = Form(Non
     if not username or not password:
         return HTMLResponse('Error: Invalid credentials. <a href="/login">Try again</a>')
 
-    if len(username) < 3 or len(password) < 8:
-        return HTMLResponse('Error: Invalid credentials. <a href="/login">Try again</a>')
 
     # Generic error - no user enumeration
     error_msg = 'Error: Invalid credentials. <a href="/login">Try again</a>'
@@ -66,15 +58,7 @@ def login(request: Request, username: str = Form(None), password: str = Form(Non
         request.session['username'] = user['username']
         request.session['email'] = user['email']
 
-        # Vuln #2: Stored XSS - username injected unescaped into HTML
-        with open(os.path.join(FRONTEND_DIR, 'welcome.html'), 'r', encoding='utf-8') as f:
-            html = f.read()
-        # VULNERABLE: No HTML escaping - XSS happens here
-        html = html.replace('{{username}}', user['username'])
-        # Vuln #6: Information disclosure - email and timestamp in comments
-        html = html + '\n<!-- User email: ' + user['email'] + ' | Login time: ' + str(time.time()) + ' -->'
-
-        response = RedirectResponse('/dashboard', status_code=302)
-        return response
+        # Redirect to protected welcome page
+        return RedirectResponse('/welcome', status_code=302)
     else:
         return HTMLResponse(error_msg)

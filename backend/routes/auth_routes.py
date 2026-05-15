@@ -77,28 +77,17 @@ def search_user(q: str = None):
         # Vuln #6: Error messages reveal SQL structure
         return HTMLResponse(f"<h2>Error</h2><p>{str(e)}</p>")
 
-# Dashboard - requires session
-from fastapi import Request
-@router.get('/dashboard')
-def dashboard(request: Request):
-    """Vuln #3: Session management - weak session secret allows hijacking"""
-    # Check if user is logged in
+@router.get('/welcome')
+def welcome_page(request: Request):
+    """Protected welcome page - requires session"""
     if 'user_id' not in request.session:
         return RedirectResponse('/login', status_code=302)
 
     username = request.session.get('username', 'Unknown')
-    email = request.session.get('email', 'Unknown')
 
-    # Vuln #2: Stored XSS - username from session is not escaped
-    html = f"""
-    <html>
-    <body style="font-family: Arial; margin: 40px;">
-        <h1>Welcome, {username}!</h1>
-        <p>Email: {email}</p>
-        <p><a href="/logout">Logout</a></p>
-    </body>
-    </html>
-    """
+    with open(os.path.join(FRONTEND_DIR, 'welcome.html'), 'r', encoding='utf-8') as f:
+        html = f.read()
+    html = html.replace('{{username}}', username)
     return HTMLResponse(html)
 
 @router.get('/logout')

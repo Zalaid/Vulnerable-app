@@ -26,6 +26,7 @@ app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 
 app.include_router(router)
 app.mount('/css', StaticFiles(directory=os.path.join(FRONTEND_DIR, 'css')), name='css')
+app.mount('/images', StaticFiles(directory=os.path.join(FRONTEND_DIR, 'images')), name='images')
 
 if __name__ == '__main__':
     import uvicorn
