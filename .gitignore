@@ -34,4 +34,15 @@ Thumbs.db
 dist/
 build/
 *.egg-info/
-.claude/worktrees/layout-fix
+
+# Planning / scratch files
+pland.md
+plan.md
+*.draft.md
+docs/BACKEND.md
+
+# Claude Code internal files
+.claude/
+
+# uv lock file (reproducibility not needed for this project)
+uv.lock

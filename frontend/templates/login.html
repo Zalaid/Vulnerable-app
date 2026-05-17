@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vulnerable Web Application</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="auth-body">
+
+  <header class="page-header">
+    <span class="page-header__title">Vulnerable Web Application</span>
+    <div class="page-header__logos">
+      <img src="/static/images/PUCIT_Logo.png" alt="PUCIT Logo">
+      <img src="/static/images/blue-logo-scl2.png" alt="SCL Logo">
+      <img src="/static/images/excaliat-logo.png" alt="Excaliat Logo">
+    </div>
+  </header>
+
+  <div class="auth-split">
+
+    <div class="auth-panel">
+      <span class="auth-panel__label">Security Lab</span>
+      <h2>Welcome to the<br>Vulnerability Lab</h2>
+      <p>
+        An intentional training environment where you learn to identify,
+        exploit, and mitigate real-world web security vulnerabilities.
+      </p>
+      <ul class="auth-panel__bullets">
+        <li>SQL Injection &amp; Authentication Bypass</li>
+        <li>Cross-Site Scripting (Stored &amp; Reflected)</li>
+        <li>Session Hijacking &amp; Cookie Theft</li>
+        <li>Brute Force &amp; Rate Limiting</li>
+        <li>Insecure Data Exposure</li>
+      </ul>
+    </div>
+
+    <div class="auth-form-panel">
+      <div class="auth-form-inner">
+        <h1>Log In</h1>
+        <p class="subtitle">Enter your credentials to access the lab</p>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Your username" autocomplete="username">
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Your password" autocomplete="current-password">
+          </div>
+
+          <div id="login-error" class="login-error"></div>
+
+          <button type="submit">Log In</button>
+        </form>
+
+        <div class="link-row">
+          Don't have an account? <a href="/signup">Sign up</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var errDiv = document.getElementById('login-error');
+      errDiv.classList.remove('visible');
+      errDiv.textContent = '';
+
+      var body = new URLSearchParams({
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+      });
+
+      try {
+        var res = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body,
+          credentials: 'same-origin',
+          redirect: 'follow'
+        });
+
+        if (res.status === 401) {
+          errDiv.textContent = 'Invalid username or password. Please try again.';
+          errDiv.classList.add('visible');
+        } else if (res.ok) {
+          window.location.href = '/welcome';
+        } else {
+          errDiv.textContent = 'Something went wrong. Please try again.';
+          errDiv.classList.add('visible');
+        }
+      } catch (err) {
+        errDiv.textContent = 'Connection error. Please try again.';
+        errDiv.classList.add('visible');
+      }
+    });
+  </script>
+</body>
+</html>

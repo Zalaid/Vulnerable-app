@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vulnerable Web Application</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="auth-body">
+
+  <header class="page-header">
+    <span class="page-header__title">Vulnerable Web Application</span>
+    <div class="page-header__logos">
+      <img src="/static/images/PUCIT_Logo.png" alt="PUCIT Logo">
+      <img src="/static/images/blue-logo-scl2.png" alt="SCL Logo">
+      <img src="/static/images/excaliat-logo.png" alt="Excaliat Logo">
+    </div>
+  </header>
+
+  <div class="auth-split">
+
+    <div class="auth-panel">
+      <span class="auth-panel__label">Security Lab</span>
+      <h2>Create Your<br>Lab Account</h2>
+      <p>
+        Register to access the hands-on vulnerability lab.
+        Once logged in you will receive a full briefing on your
+        assessment objectives.
+      </p>
+      <ul class="auth-panel__bullets">
+        <li>Hands-on vulnerability exploitation</li>
+        <li>Real attack vectors and payloads</li>
+        <li>Code-level root cause analysis</li>
+        <li>Secure coding mitigation exercises</li>
+      </ul>
+    </div>
+
+    <div class="auth-form-panel">
+      <div class="auth-form-inner">
+        <h1>Create Account</h1>
+        <p class="subtitle">Fill in the details below to register</p>
+
+        <form action="/signup" method="POST" id="signup-form">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Choose a username" autocomplete="username">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="your@email.com" autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Choose a password" autocomplete="new-password">
+          </div>
+
+          <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Re-enter your password" autocomplete="new-password">
+            <span id="pw-error" class="field-error" style="display:none;">Passwords do not match.</span>
+          </div>
+
+          <button type="submit">Sign Up</button>
+        </form>
+
+        <div class="link-row">
+          Already have an account? <a href="/login">Log in</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      var pw  = document.getElementById('password').value;
+      var cpw = document.getElementById('confirm_password').value;
+      var err = document.getElementById('pw-error');
+      if (pw !== cpw) {
+        err.style.display = 'block';
+        e.preventDefault();
+      } else {
+        err.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

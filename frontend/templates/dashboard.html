@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vulnerable Web Application</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body class="dashboard-body">
+
+  <header class="page-header">
+    <span class="page-header__title">Vulnerable Web Application</span>
+    <div class="page-header__logos">
+      <img src="/static/images/PUCIT_Logo.png" alt="PUCIT Logo">
+      <img src="/static/images/blue-logo-scl2.png" alt="SCL Logo">
+      <img src="/static/images/excaliat-logo.png" alt="Excaliat Logo">
+    </div>
+  </header>
+
+  <div class="dash-banner">
+    <div class="dash-banner__left">
+      <h1>Security Vulnerability Lab</h1>
+      <p>Identify, exploit, and mitigate real-world web vulnerabilities</p>
+    </div>
+    <div class="dash-banner__right">
+      <div class="dash-banner__user">
+        Logged in as
+        <strong>{{username}}</strong>
+      </div>
+      <a href="/logout" class="btn-logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="dash-content">
+
+    <div class="dash-mission">
+      <h2>Your Mission</h2>
+      <p>
+        This application contains multiple deliberately introduced security vulnerabilities.
+        Your task is to <strong>identify</strong> each vulnerability in the source code,
+        <strong>demonstrate exploitation</strong> using appropriate attack vectors and tools,
+        and then <strong>patch the code</strong> to implement secure defenses against each attack.
+      </p>
+    </div>
+
+    <p class="dash-section-heading">Vulnerabilities to Discover</p>
+    <ul class="dash-vuln-grid">
+      <li>
+        <span class="vuln-tag tag-sqli">SQLi</span>
+        <div>
+          <strong>SQL Injection</strong>
+          <p>Manipulate database queries through unsanitized user input to bypass authentication or extract data.</p>
+        </div>
+      </li>
+      <li>
+        <span class="vuln-tag tag-xss">XSS</span>
+        <div>
+          <strong>Stored XSS</strong>
+          <p>Inject persistent JavaScript saved to the database that executes for every subsequent visitor.</p>
+        </div>
+      </li>
+      <li>
+        <span class="vuln-tag tag-xss">XSS</span>
+        <div>
+          <strong>Reflected XSS</strong>
+          <p>Inject JavaScript via URL parameters that is reflected in the HTTP response without escaping.</p>
+        </div>
+      </li>
+      <li>
+        <span class="vuln-tag tag-session">Session</span>
+        <div>
+          <strong>Session Hijacking</strong>
+          <p>Steal and reuse session cookies to impersonate an authenticated user without knowing their password.</p>
+        </div>
+      </li>
+      <li>
+        <span class="vuln-tag tag-brute">Brute</span>
+        <div>
+          <strong>Brute Force Attack</strong>
+          <p>Exploit the absence of rate limiting to automatically guess credentials with no lockout mechanism.</p>
+        </div>
+      </li>
+      <li>
+        <span class="vuln-tag tag-crypto">Crypto</span>
+        <div>
+          <strong>Weak Password Storage</strong>
+          <p>Passwords are protected with a broken algorithm, making them trivially reversible if the database leaks.</p>
+        </div>
+      </li>
+      <li>
+        <span class="vuln-tag tag-exposure">Exposed</span>
+        <div>
+          <strong>Exposed Database Endpoint</strong>
+          <p>A misconfigured route allows anyone to download the entire application database over HTTP.</p>
+        </div>
+      </li>
+      <li>
+        <span class="vuln-tag tag-csrf">CSRF</span>
+        <div>
+          <strong>Cross-Site Request Forgery</strong>
+          <p>Forge authenticated requests from a victim's browser to perform actions on their behalf.</p>
+        </div>
+      </li>
+    </ul>
+
+    <p class="dash-section-heading">How to Approach Each Vulnerability</p>
+    <div class="dash-steps">
+      <div class="dash-step">
+        <span class="step-num">1</span>
+        <div class="dash-step-body">
+          <strong>Find</strong>
+          <p>Locate the vulnerable code in the source files and understand the root cause.</p>
+        </div>
+      </div>
+      <div class="dash-step">
+        <span class="step-num">2</span>
+        <div class="dash-step-body">
+          <strong>Exploit</strong>
+          <p>Demonstrate the attack with a working payload, tool, or script to confirm impact.</p>
+        </div>
+      </div>
+      <div class="dash-step">
+        <span class="step-num">3</span>
+        <div class="dash-step-body">
+          <strong>Mitigate</strong>
+          <p>Patch the code using secure coding practices and verify that the fix holds.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
