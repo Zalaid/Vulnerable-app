@@ -6,7 +6,7 @@ username = "admin"
 passwords = [
     "password", "123456", "admin123", "letmein",
     "welcome", "monkey", "dragon", "master", "sunshine",
-    "princess", "qwerty", "admin", "test", "12345678"
+    "princess", "qwerty", "admin", "test", "1234568"
 ]
 
 print(f"Brute forcing username: {username}")
