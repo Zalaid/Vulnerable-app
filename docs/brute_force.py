@@ -10,7 +10,7 @@ passwords = [
 ]
 
 print(f"Brute forcing username: {username}")
-print(f"Testing {len(passwords)} passwords...\n")
+print(f"Testing {len(passwords)} passwords..\n")
 
 for password in passwords:
     response = requests.post(
