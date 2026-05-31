@@ -1,10 +1,10 @@
 import requests
 
-url = "http://localhost:3001/login"
-username = "admin"
+url = "https://vuln-app-cc-1.onrender.com/login"
+username = "maaz"
 
 passwords = [
-    "password", "123456", "admin123", "letmein",
+    "password", "1", "zalaid", "admin123", "letmein",
     "welcome", "monkey", "dragon", "master", "sunshine",
     "princess", "qwerty", "admin", "test", "1234568"
 ]
